@@ -1,0 +1,23 @@
+This illustration shows you what happens when a user makes a request to a specific website (in this case www.foobar.com with an IP of 8.8.8.8).
+
+I will now explain to you what the various components of this diagram are about :
+
+The server : This is a machine with an IP adress which hosts all of the components that allows the website to function.
+
+Domain name : In this case, this is Foobar.com, it allows users to access its domain in a user-friendly way.
+
+DNS : This is the www in front of Foobar.com, this allows the user to connect to the IP adress of the server.
+
+Web Server Nginx : This handles the HTTP requests and queries made by the various users and convey the server's responses to them.
+
+Application Server : This executes the application code and processes the business logic which communicates with the database.
+
+Database : This is used to store all the dynamic data for the website.
+
+- What are the main issues with this architecture model though ?
+
+1. There is a SPOF (single point of failure) which means that if the server ever goes down, the whole website will be down aswell.
+
+2. Any maintenance that must be done of the website requires the whole website to be put down during the maintenance.
+
+3. There is a limited scalability due to being only one server, it can only handle a limited number of requests at the same time.
