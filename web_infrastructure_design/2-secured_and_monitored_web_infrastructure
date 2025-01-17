@@ -1,0 +1,38 @@
+Here is a basic explanation of my infrastructure :
+
+1. Firewalls
+What is their purpose ?
+They protect different parts of the infrastructure by filtering incoming and outgoing traffic, 
+ensuring only authorized connections are allowed.
+
+What about their placement ? 
+- Firewall 1: Secures traffic entering from external users, allowing only HTTPS connections to the Load Balancer.
+- Firewall 2: Protects the Web/App Server from potential threats from the Load Balancer.
+- Firewall 3: Shields the Database Server from unauthorized requests from the Web/App Server.
+
+2. HTTPS
+What is its purpose and reason ? 
+Its purpose is to ensure encrypted communication between the user and the website.
+Its reason is because modern web security standards requires HTTPS to make websites more secure.
+
+3. Monitoring Clients
+Its purpose is to collect various system metrics such as (Traffic, Errrors, etc...) and send them
+to a central monitoring service (Sumologic)
+
+Here are the different placements :
+- Load Balancer: Tracks load distribution, request handling, and traffic volume.
+- Web/App Server: Monitors application performance, request response times, and potential errors.
+- Database Server: Collects metrics for database performance, replication status, and query throughput.
+
+What are the different infrastructure issues ?
+1. SSL Termination at Load Balancer:
+    Issue: Traffic between the Load Balancer and Web Server is unencrypted, leaving it vulnerable within the internal network.
+    Solution: Use end-to-end encryption by also securing the connection from the Load Balancer to the Web Server.
+2. Single MySQL Server for Writes:
+    Issue: A single point of failure; if the primary MySQL server fails, no writes are possible.
+    Solution: Implement a cluster with automatic failover or use a distributed database system.
+3. All Servers Sharing Components:
+    Issue: It reduces scalability and complicates management. If one server is overwhelmed, others cannot compensate.
+    Solution: Separate roles (e.g., dedicated web servers, app servers, and database servers) for better scalability and reliability.
+
+
