@@ -1,0 +1,94 @@
+Additional Elements :
+- Load Balancer
+- A second Server
+
+The Load Balancer is used in order to not overload the servers with an overwhelming number of queries, it shares the number of queries between the two servers.
+The Second Server is used in order to increase the number of queries that a user (or users) can send before the server starts to have problems, even if that is the case, the load balancer helps with sharing out the various queries which can be sent by the various users.
+
+Since our load balancer uses the round robin system, it means that our load balancer has a static algorithm.
+
+Requests are distributed sequentially across the server pool
+Each server receives requests in turn
+Example: Server1 -> Server2 -> Server1 -> Server2
+
+
+Setup: Active-Active
+
+Both servers actively handle requests simultaneously
+Differs from Active-Passive where the second server only activates if the first fails
+Better resource utilization but requires more coordination
+
+
+Multiple Servers
+
+-Eliminates SPOF for web/application servers
+-Allows for load distribution
+Each server contains:
+
+- Web server (Nginx)
+- Application server
+- Application files
+
+
+Database Primary-Replica Cluster
+
+Primary Node (Master):
+
+It will: - Handle all write operations
+- Maintain authoritative dataset
+- Replicates data to replica node
+- Only database that can accept writes from the application
+
+
+Replica Node (Slave):
+
+It will : - Handle read operations
+- Can be promoted to primary if needed
+- Reduces read load on primary node
+
+
+How Replication Works:
+
+- Primary records all changes in binary log
+- Replica copies binary log
+- Replica applies changes to stay synchronized
+- Asynchronous replication by default
+
+
+Infrastructure Issues
+Single Points of Failure (SPOF)
+
+Load balancer is a SPOF
+Database Primary node is a SPOF
+
+Security Issues
+
+No firewall implemented
+No HTTPS encryption
+
+Data transmitted in plain text
+Vulnerable to man-in-the-middle attacks
+
+
+No network segmentation
+
+Monitoring Limitations
+
+No monitoring solutions implemented
+Cannot track:
+
+- Server health
+- Resource utilization
+- Application performance
+- Security threats
+- Response times
+
+
+No alerting system for issues
+No performance metrics collection
+
+Infrastructure Improvement Suggestions
+
+- Implement firewalls
+- Set up monitoring system
+- Implement automated backups
